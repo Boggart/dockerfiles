@@ -1,7 +1,7 @@
 FROM node:current-alpine as builder
 RUN apk add -U build-base python git
 WORKDIR /usr/src/app
-RUN git clone https://github.com/butlerx/wetty /usr/scr/app && \
+RUN git clone https://github.com/butlerx/wetty /usr/src/app && \
     yarn && \
     yarn build && \
     yarn install --production --ignore-scripts --prefer-offline
