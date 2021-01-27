@@ -1,0 +1,5 @@
+#!/bin/bash
+wget https://downloads.dockerslim.com/releases/1.33.0/dist_linux.tar.gz
+tar -xvf ./dist_linux.tar.gz
+PATH=$PATH:$PWD/dist_linux
+docker-slim build --show-blogs --continue-after timeout --http-probe false --dockerfile $DOCKERFILE_PATH --tag $IMAGE_NAME .
