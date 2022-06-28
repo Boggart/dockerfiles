@@ -5,7 +5,16 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+  workflow_dispatch:
+    inputs:
+      job_to_run:
+        description: 'Job to run'     
+        required: true
+        default: 'changes' 
+        type: choice
+        options:
+        - changes
+        - squid_proxy
 jobs:
 
   changes:
@@ -14,7 +23,7 @@ jobs:
     outputs:
       squid-proxy: ${{ steps.filter.outputs.squid-proxy }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: dorny/paths-filter@v2
       id: filter
       with:
@@ -24,7 +33,7 @@ jobs:
           
   build:
     needs: changes
-    if: ${{ needs.changes.outputs.squid-proxy == 'true' }}
+    if: ${{ needs.changes.outputs.squid-proxy == 'true' || inputs.job_to_run == 'squid_proxy' }}
     runs-on: ubuntu-latest
 
     steps:
