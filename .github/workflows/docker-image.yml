@@ -15,6 +15,10 @@ on:
         options:
         - changes
         - squid_proxy
+
+env:
+  REGISTRY: ghcr.io
+
 jobs:
 
   changes:
